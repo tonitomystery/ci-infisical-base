@@ -28,13 +28,8 @@ provision_app:
   image: DOCKERHUB_USERNAME/ci-infisical-base:latest
 
   script:
-    - chmod +x scripts/*
-    - ./scripts/aws_auth.sh
     - infisical export --domain="$INFISICAL_API_URL" --projectId="$INFISICAL_PROJECT_ID" --env=prod --format=dotenv > .env
-    - ./scripts/create_docker_compose.sh
-    - ./scripts/create_options.sh
-    - ./scripts/update_source_bundle.sh
-    - ./scripts/provision_app.sh
+
 ```
 
 Todos los tools necesarios (`infisical`, `curl`, `zip`) ya están instalados en la imagen. No es necesario instalarlos en el pipeline de CI.
