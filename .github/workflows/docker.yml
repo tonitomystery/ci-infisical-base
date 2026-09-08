@@ -30,8 +30,15 @@ jobs:
         id: push
         with:
           context: .
-          push: true
+          load: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/ci-infisical-base:latest
+          # Disable SBOM provenance (can interfere with push)
+          provenance: false
+
+      - name: Push to Docker Hub
+        run: |
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login --username "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/ci-infisical-base:latest
 
       - name: Print image digest
         run: echo "Digest -> ${{ steps.push.outputs.digest }}"
