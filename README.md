@@ -12,20 +12,20 @@ Imagen Docker pública para entornos CI/CD, basada en [`gitlab-org/cloud-deploy/
 ## Cómo hacer pull
 
 ```bash
-docker pull DOCKERHUB_USERNAME/ci-infisical-base:latest
+docker pull DOCKERHUB_USERNAME/ci-infisical-aws:latest
 ```
 
 ## Comprobar la versión de Infisical
 
 ```bash
-docker run --rm DOCKERHUB_USERNAME/ci-infisical-base:latest infisical --version
+docker run --rm DOCKERHUB_USERNAME/ci-infisical-aws:latest infisical --version
 ```
 
 ## Uso en GitLab CI
 
 ```yaml
 provision_app:
-  image: DOCKERHUB_USERNAME/ci-infisical-base:latest
+  image: DOCKERHUB_USERNAME/ci-infisical-aws:latest
 
   script:
     - infisical export --domain="$INFISICAL_API_URL" --projectId="$INFISICAL_PROJECT_ID" --env=prod --format=dotenv > .env
