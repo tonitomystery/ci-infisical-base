@@ -30,3 +30,4 @@ jobs:
           pull: true
           no-cache: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/ci-infisical-base:latest
+          provenance: false
