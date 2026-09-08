@@ -18,7 +18,7 @@ jobs:
       - name: Log in to DockerHub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: amaristany
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push Docker image
@@ -29,5 +29,5 @@ jobs:
           push: true
           pull: true
           no-cache: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ci-infisical-base:latest
+          tags: amaristany/ci-infisical-base:latest
           provenance: false
