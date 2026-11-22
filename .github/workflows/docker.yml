@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+  # Reconstruye cada lunes a las 6:00 UTC para recoger la última aws-base:latest
+  # y la última versión del CLI de Infisical sin necesidad de commits.
+  schedule:
+    - cron: "0 6 * * 1"
+  # Permite reconstruir manualmente desde la pestaña Actions.
+  workflow_dispatch:
 
 jobs:
   build-and-push:
@@ -21,7 +27,7 @@ jobs:
       - name: Build Docker image
         run: |
           echo "Building image for user: ${{ secrets.DOCKERHUB_USERNAME }}"
-          docker build -t "${{ secrets.DOCKERHUB_USERNAME }}/ci-infisical-aws:latest" .
+          docker build --pull --no-cache -t "${{ secrets.DOCKERHUB_USERNAME }}/ci-infisical-aws:latest" .
 
       - name: Push Docker image
         run: |
